@@ -1,7 +1,6 @@
 package com.ironhack.labjavaintrotospringboot.controller;
 
 import com.ironhack.labjavaintrotospringboot.model.user.Department;
-import com.ironhack.labjavaintrotospringboot.model.user.DoctorStatus;
 import com.ironhack.labjavaintrotospringboot.model.user.Patient;
 import com.ironhack.labjavaintrotospringboot.repository.PatientRepository;
 import com.ironhack.labjavaintrotospringboot.service.PatientService;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.nio.file.ReadOnlyFileSystemException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
