@@ -1,6 +1,7 @@
 package com.ironhack.labjavaintrotospringboot.model.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Patient extends User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patientId;
 
+    @NotNull(message = "You must provide a date of birth")
     private Date dateOfBirth;
 
     @ManyToOne

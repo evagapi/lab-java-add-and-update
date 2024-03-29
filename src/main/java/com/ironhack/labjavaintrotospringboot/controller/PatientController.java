@@ -4,6 +4,7 @@ import com.ironhack.labjavaintrotospringboot.model.user.Department;
 import com.ironhack.labjavaintrotospringboot.model.user.Patient;
 import com.ironhack.labjavaintrotospringboot.repository.PatientRepository;
 import com.ironhack.labjavaintrotospringboot.service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,12 @@ public class PatientController {
             return $patient.get();
         }
         throw new ResponseStatusException(NOT_FOUND, "Unable to find the patient");
+    }
+
+    @PostMapping("/patients")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addPatient(@RequestBody @Valid Patient patient) {
+        patientRepository.save(patient);
     }
 
     @GetMapping("/patients/department/{department}")

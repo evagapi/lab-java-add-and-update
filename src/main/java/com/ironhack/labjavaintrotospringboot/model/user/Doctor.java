@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Setter
@@ -28,7 +28,7 @@ public class Doctor extends User {
 
     @OneToMany(mappedBy = "doctor")
     @JsonIgnore
-    private Set<Patient> patients;
+    private List<Patient> patients;
 
     public Doctor(int doctorId, Department department, DoctorStatus status) {
         this.doctorId = doctorId;
