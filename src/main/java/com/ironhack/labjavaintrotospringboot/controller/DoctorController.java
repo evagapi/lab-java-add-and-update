@@ -60,6 +60,12 @@
 
         }
 
+        @PutMapping("/doctors/{id}")
+        @ResponseStatus(value = HttpStatus.NO_CONTENT)
+        public void updateDoctorStatus(@PathVariable int id, @RequestBody Doctor doctor) {
+            doctorService.update(id, doctor);
+        }
+
         @GetMapping("/doctors/department/{department}")
         @ResponseStatus(HttpStatus.OK)
         public List<Doctor> getDoctorsByDepartment(@PathVariable(name = "department") String department) {
