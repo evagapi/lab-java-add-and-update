@@ -47,6 +47,12 @@ public class PatientController {
         patientRepository.save(patient);
     }
 
+    @PutMapping("/patients/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updatePatient(@PathVariable int id, @RequestBody Patient patient) {
+        patientService.update(id, patient);
+    }
+
     @GetMapping("/patients/department/{department}")
     @ResponseStatus(HttpStatus.OK)
     public List<Patient> getPatientsByAdmittingDepartment(@PathVariable(name = "department") String doctorsDepartment) {
@@ -70,5 +76,4 @@ public class PatientController {
         @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
             return patientRepository.findPatientsByBirthDateRange(startDate, endDate);
         }
-
 }
