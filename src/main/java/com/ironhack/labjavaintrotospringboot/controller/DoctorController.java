@@ -14,6 +14,7 @@
     import java.util.List;
     import java.util.Optional;
 
+    import static com.ironhack.labjavaintrotospringboot.utils.Helper.stringToUpperCase;
     import static org.springframework.http.HttpStatus.BAD_REQUEST;
     import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -50,7 +51,7 @@
         @GetMapping("/doctors/status/{status}")
         @ResponseStatus(HttpStatus.OK)
         public List<Doctor> getDoctorsByStatus(@PathVariable(name = "status") String status) {
-            String upperCaseStatus = status.toUpperCase();
+            String upperCaseStatus = stringToUpperCase(status);
             try {
                 DoctorStatus statusEnum = DoctorStatus.valueOf(upperCaseStatus);
                 return doctorRepository.findByStatus(statusEnum);
@@ -63,13 +64,13 @@
         @PutMapping("/doctors/{id}")
         @ResponseStatus(value = HttpStatus.NO_CONTENT)
         public void updateDoctorStatus(@PathVariable int id, @RequestBody Doctor doctor) {
-            doctorService.update(id, doctor);
+            doctorService.updateStatus(id, doctor);
         }
 
         @GetMapping("/doctors/department/{department}")
         @ResponseStatus(HttpStatus.OK)
         public List<Doctor> getDoctorsByDepartment(@PathVariable(name = "department") String department) {
-            String upperCaseDepartment = department.toUpperCase();
+            String upperCaseDepartment = stringToUpperCase(department);
             try {
                 Department departmentEnum = Department.valueOf(upperCaseDepartment);
                 return doctorRepository.findByDepartment(departmentEnum);
@@ -77,5 +78,11 @@
                 throw new ResponseStatusException(BAD_REQUEST, "Unable to find this department");
             }
 
+        }
+
+        @PutMapping("/doctors/department/{id}")
+        @ResponseStatus(HttpStatus.NO_CONTENT)
+        public void updateDoctorDepartment(@PathVariable int id, @RequestBody Doctor doctor) {
+            doctorService.updateDepartment(id, doctor);
         }
     }

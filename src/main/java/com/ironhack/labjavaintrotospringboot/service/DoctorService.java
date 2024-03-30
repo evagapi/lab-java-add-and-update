@@ -16,12 +16,17 @@ public class DoctorService {
     public List<Doctor> getAllDoctors() { return doctorRepository.findAll(); }
     public Doctor addNewDoctor(Doctor doctor) { return doctorRepository.save(doctor); }
 
-    public void update(int id, Doctor doctor) {
+    public void updateStatus(int id, Doctor doctor) {
         Optional<Doctor> $doctor = doctorRepository.findById(id);
-        doctor.setDoctorId($doctor.get().getDoctorId());
-        doctor.setName($doctor.get().getName());
-        doctor.setDepartment($doctor.get().getDepartment());
-        doctor.setPatients($doctor.get().getPatients());
-        doctorRepository.save(doctor);
+        Doctor existingDoctor = $doctor.get();
+        existingDoctor.setStatus(doctor.getStatus());
+        doctorRepository.save(existingDoctor);
+    }
+
+    public void updateDepartment(int id, Doctor doctor) {
+        Optional<Doctor> $doctor = doctorRepository.findById(id);
+        Doctor existingDoctor = $doctor.get();
+        existingDoctor.setDepartment(doctor.getDepartment());
+        doctorRepository.save(existingDoctor);
     }
 }
